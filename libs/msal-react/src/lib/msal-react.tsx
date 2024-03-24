@@ -1,24 +1,25 @@
+// libs/msal-react/src/lib/msal-react.tsx
 import React from 'react';
-import styles from './msal-react.module.scss';
+import { Configuration, PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
-import { PublicClientApplication } from '@azure/msal-browser';
-import { msalConfig } from './msal-react.config';
 
-/* eslint-disable-next-line */
-export interface MsalReactProps {}
+// Define your MSAL configuration
+const msalConfig: Configuration = {
+  auth: {
+    clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID || "",
+    authority: `https://login.microsoftonline.com/${process.env.NEXT_PUBLIC_AZURE_AD_TENANT_ID}`,
+    redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URI,
+  },
+  cache: {
+    cacheLocation: "sessionStorage",
+    storeAuthStateInCookie: typeof window !== "undefined" && window.navigator.userAgent.indexOf("MSIE") > -1,
+  },
+};
 
-export function MsalReact(props: MsalReactProps) {
-  // Create an MSAL instance with your configuration
-  const msalInstance = new PublicClientApplication(msalConfig);
+// Initialize MSAL instance with your configuration
+const msalInstance = new PublicClientApplication(msalConfig);
 
-  return (
-    // Wrap your component's content with MsalProvider
-    <MsalProvider instance={msalInstance}>
-      <div className={styles['container']}>
-        <h1>Welcome to MsalReact!</h1>
-      </div>
-    </MsalProvider>
-  );
-}
-
-export default MsalReact;
+// Create a component to provide MSAL functionalities
+export const MsalReactProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+  return <MsalProvider instance={msalInstance}>{children}</MsalProvider>;
+};
