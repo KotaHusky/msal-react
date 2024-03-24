@@ -1,0 +1,12 @@
+.DS_Store
+
+# React
+node_modules/
+build/
+dist/
+
+# NX
+.nx/
+.nx-output/
+.nx-cache/
+
