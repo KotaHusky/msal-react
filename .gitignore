@@ -10,3 +10,6 @@ dist/
 .nx-output/
 .nx-cache/
 
+# Next.js
+.next
+out

@@ -1,26 +1,21 @@
-// libs/msal-react/src/lib/ButtonLogin.tsx
 import React from 'react';
 import { useMsal } from '@azure/msal-react';
-import Button from '@mui/material/Button'; // Assuming you're using MUI for styling
+import { loginRequest } from '../msal-react';
 
-export const ButtonLogin = () => {
+export function ButtonLogin() {
   const { instance } = useMsal();
 
-  const handleLogin = async () => {
-    try {
-      await instance.loginPopup({
-        scopes: ["User.Read"],
-        prompt: "select_account",
-      });
-      // Handle response if needed
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <Button onClick={handleLogin} variant="contained" color="primary">
-      Log In
-    </Button>
+    <div className="inline-flex rounded-md shadow">
+      <a
+        href="#"
+        onClick={() => instance.loginPopup(loginRequest)}
+        className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+      >
+        Log In
+      </a>
+    </div>
   );
-};
+}
+
+export default ButtonLogin;

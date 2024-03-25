@@ -50,7 +50,7 @@
   "generators": {
     "@nx/next": {
       "application": {
-        "style": "scss",
+        "style": "tailwind",
         "linter": "eslint"
       }
     },

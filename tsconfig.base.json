@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@org/msal-react": ["libs/msal-react/src/index.ts"]
+      "@myorg/msal-react": ["libs/msal-react/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

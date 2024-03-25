@@ -1,4 +1,3 @@
-// libs/msal-react/src/lib/msal-react.tsx
 import React from 'react';
 import { Configuration, PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
@@ -18,6 +17,11 @@ const msalConfig: Configuration = {
 
 // Initialize MSAL instance with your configuration
 const msalInstance = new PublicClientApplication(msalConfig);
+
+// Provide a login request
+export const loginRequest = {
+  scopes: ["User.Read"],
+};
 
 // Create a component to provide MSAL functionalities
 export const MsalReactProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
