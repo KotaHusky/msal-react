@@ -1,13 +1,13 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - msal-react-kotahusky
+name: Build and deploy Nx Next.js app to Azure Web App - msal-react-kotahusky
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
   workflow_dispatch:
+
+env:
+  APP_NAME: 'msal-react'
 
 jobs:
   build:
@@ -24,11 +24,16 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npx nx build ${{ env.APP_NAME }} --prod
+          npx nx test ${{ env.APP_NAME }}
+        env:
+          NEXT_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_CLIENT_ID }}
+          NEXT_PUBLIC_TENANT_ID: ${{ secrets.NEXT_PUBLIC_TENANT_ID }}
+          NEXT_PUBLIC_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}
+          APP_NAME: ${{ env.APP_NAME }}
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: zip release.zip dist/apps/${{ env.APP_NAME }} -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -56,7 +61,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'msal-react-kotahusky'
+          app-name: ${{ env.APP_NAME }}
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8AD7EEE609AA4B08996ADF2983056C0F }}
-          package: .
+          package: dist/apps/${{ env.APP_NAME }}
