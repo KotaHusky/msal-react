@@ -28,6 +28,8 @@ jobs:
           npm ci
           npx nx build ${{ env.APP_NAME }} --prod
           # npx nx test ${{ env.APP_NAME }}
+          mv .next/static .next/standalone/.next/static
+          mv public .next/standalone/public
         env:
           NEXT_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_CLIENT_ID }}
           NEXT_PUBLIC_TENANT_ID: ${{ secrets.NEXT_PUBLIC_TENANT_ID }}
@@ -35,7 +37,10 @@ jobs:
           APP_NAME: ${{ env.APP_NAME }}
 
       - name: Zip artifact for deployment
-        run: zip release.zip dist/apps/${{ env.APP_NAME }} -r
+        run: |
+          $ZIP_FILE_NAME = "./${FILE_NAME}.zip"
+          zip $ZIP_FILE_NAME ./* .next -qr
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
