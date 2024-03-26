@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npx nx dev msal-react-demo",
-    "build": "npx nx build msal-react-demo"
+    "dev": "npx nx dev msal-react-demo",
+    "start": "npx nx start msal-react-demo",
+    "build": "npx nx build msal-react-demo",
+    "docker": "docker build -t nextjs-docker .; docker run -p 3000:3000 nextjs-docker"
   },
   "private": true,
   "dependencies": {

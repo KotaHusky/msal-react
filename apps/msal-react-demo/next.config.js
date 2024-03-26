@@ -1,4 +1,5 @@
 //@ts-check
+// https://github.com/vercel/next.js/tree/canary/examples/with-docker
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { composePlugins, withNx } = require('@nx/next');

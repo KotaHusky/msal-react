@@ -19,16 +19,27 @@ const msalConfig: Configuration = {
   },
 };
 
-// Initialize MSAL instance with your configuration
-const msalInstance = new PublicClientApplication(msalConfig);
+let msalInstance: PublicClientApplication;
+
+try {
+  // Initialize MSAL instance with your configuration
+  msalInstance = new PublicClientApplication(msalConfig);
+} catch (error) {
+  console.error("Failed to initialize MSAL", error);
+  // Handle error here, e.g. by showing an error message to the user
+}
 
 // Create a component to provide MSAL functionalities
 export const MsalProviderComponent: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  if (!msalInstance) {
+    return <div>Error initializing MSAL. Please check your configuration.</div>;
+  }
+
   return (
     <div id="msal-provider">
-      <MsalProvider instance={msalInstance}>{children}</MsalProvider>;
+      <MsalProvider instance={msalInstance}>{children}</MsalProvider>
     </div>
   );
 };

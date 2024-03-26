@@ -1,11 +1,14 @@
 'use client';
 
 import React from 'react';
-import { ButtonLogin, ButtonLogout } from '@my-workspace/lib-msal-react';
+import dynamic from 'next/dynamic';
 import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
 } from '@azure/msal-react';
+
+const ButtonLogin = dynamic(() => import('@my-workspace/lib-msal-react').then(mod => mod.ButtonLogin), { ssr: false });
+const ButtonLogout = dynamic(() => import('@my-workspace/lib-msal-react').then(mod => mod.ButtonLogout), { ssr: false });
 
 export default function Page() {
   return (
@@ -18,7 +21,7 @@ export default function Page() {
               Start your free trial today.
             </span>
           </h2>
-          <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+          <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0" id="auth">
             <AuthenticatedTemplate>
               <ButtonLogout />
             </AuthenticatedTemplate>
