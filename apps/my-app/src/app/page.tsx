@@ -19,9 +19,9 @@ export default function Page() {
             <AuthenticatedTemplate>
               <ButtonLogout />
             </AuthenticatedTemplate>
-            {/* <UnauthenticatedTemplate> */}
+            <UnauthenticatedTemplate>
               <ButtonLogin />
-            {/* </UnauthenticatedTemplate> */}
+            </UnauthenticatedTemplate>
           </div>
         </div>
       </div>
