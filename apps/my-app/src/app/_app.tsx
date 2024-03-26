@@ -1,13 +1,12 @@
-import 'tailwindcss/tailwind.css';
 import { AppProps } from 'next/app';
-import { MsalReactProvider } from '@myorg/msal-react';
+import { MsalProviderComponent } from '@myorg/msal-react';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <MsalReactProvider>
-      <Component {...pageProps} />;
-    </MsalReactProvider>
-  )
+    <MsalProviderComponent>
+      <Component {...pageProps} />
+    </MsalProviderComponent>
+  );
 }
 
-export default CustomApp;
+export default MyApp;
