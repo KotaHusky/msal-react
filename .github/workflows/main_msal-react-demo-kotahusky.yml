@@ -34,7 +34,7 @@ jobs:
       run: npx nx build msal-react-demo
 
     - name: Show directory structure
-      run: tree -L 3 -d -I 'node_modules|dist|.git' --matchdirs '/apps'
+      run: tree -L 2 -d -I 'node_modules|dist|.git'
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
