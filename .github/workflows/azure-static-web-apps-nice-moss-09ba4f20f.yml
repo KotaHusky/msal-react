@@ -20,6 +20,10 @@ jobs:
           submodules: true
           lfs: false
       - name: Build And Deploy
+        env:
+          NEXT_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_CLIENT_ID }}
+          NEXT_PUBLIC_TENANT_ID: ${{ secrets.NEXT_PUBLIC_TENANT_ID }}
+          NEXT_PUBLIC_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
