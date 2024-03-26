@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npx nx dev my-app"
+    "start": "npx nx dev msal-react-demo"
   },
   "private": true,
   "dependencies": {

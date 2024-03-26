@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { useEffect } from "react";
-import { useMsal } from "@azure/msal-react";
+import { useEffect } from 'react';
+import { useMsal } from '@azure/msal-react';
 
 export default function AuthPage() {
   const { instance } = useMsal();

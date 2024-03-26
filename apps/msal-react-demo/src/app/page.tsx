@@ -1,8 +1,11 @@
-'use client'
+'use client';
 
 import React from 'react';
-import { ButtonLogin, ButtonLogout } from '@myorg/msal-react';
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
+import { ButtonLogin, ButtonLogout } from '@my-workspace/lib-msal-react';
+import {
+  AuthenticatedTemplate,
+  UnauthenticatedTemplate,
+} from '@azure/msal-react';
 
 export default function Page() {
   return (
