@@ -5,8 +5,8 @@ name: Build and deploy Node.js app to Azure Web App - msal-react-kotahusky
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
   workflow_dispatch:
 
 jobs:
