@@ -3,7 +3,6 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 COPY apps/msal-react-demo/next.config.js ./
-RUN npm ci
 
 # Copy the .next directory and the public directory
 COPY apps/msal-react-demo/.next ./.next

@@ -24,6 +24,9 @@ jobs:
     - name: Build Nx Next.js app
       run: npx nx build msal-react-demo
 
+    - name: Show directory structure
+      run: tree -L 3
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
