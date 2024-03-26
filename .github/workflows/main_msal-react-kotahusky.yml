@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  APP_NAME: 'msal-react'
+  APP_NAME: 'msal-react-demo'
 
 jobs:
   build:
