@@ -1,10 +1,18 @@
-name: Build and deploy container app to Azure Web App - msal-react-demo-kotahusky
+name: Build and deploy container app to Azure Web App
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+  DOCKER_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
+  NX_APP_NAME: 'msal-react-demo'
+  AZURE_APP_NAME: 'msal-react-demo-kotahusky'
+  AZURE_SLOT_NAME: 'production'
+  AZURE_PUBLISH_PROFILE: ${{ secrets.AZURE_APPSERVICE_PUBLISHPROFILE }}
 
 jobs:
   build:
@@ -15,14 +23,14 @@ jobs:
 
     - uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
 
     - name: Install dependencies
       run: npm ci
 
     - name: Build Nx Next.js app
-      run: npx nx build msal-react-demo
+      run: npx nx build ${{ env.NX_APP_NAME }}
 
     - name: Show directory structure
       run: tree -a -L 3 -d ./apps ./libs
@@ -40,14 +48,14 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/kota-private:${{ github.sha }}
+        tags: index.docker.io/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
         context: .
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'production'
+      name: ${{ env.AZURE_SLOT_NAME }}
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -55,7 +63,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'msal-react-demo-kotahusky'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7dcf9c5728264f65ad25c7277f970fbf }}
-        images: 'index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/kota-private:${{ github.sha }}'
+        app-name: ${{ env.AZURE_APP_NAME }}
+        slot-name: ${{ env.AZURE_SLOT_NAME }}
+        publish-profile: ${{ env.AZURE_PUBLISH_PROFILE }}
+        images: 'index.docker.io/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}'
