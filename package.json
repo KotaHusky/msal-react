@@ -6,8 +6,7 @@
     "dev": "npx nx dev msal-react-demo",
     "start": "npx nx start msal-react-demo",
     "build": "npx nx build msal-react-demo",
-    "docker:run": "docker buildx build --tag msal-react-demo . --load; docker run -p 3000:3000 msal-react-demo",
-    "docker:upload": "docker tag msal-react-demo:latest kotaderg/kota-private:msal-react-demo; docker push kotaderg/kota-private:msal-react-demo"
+    "docker:run": "docker buildx build --tag msal-react-demo . --load; docker run -p 3000:3000 msal-react-demo"
   },
   "private": true,
   "dependencies": {
