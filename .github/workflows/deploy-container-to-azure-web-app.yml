@@ -49,11 +49,11 @@ jobs:
         push: true
         tags: index.docker.io/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
         context: .
-        build-args:
+        build-args: |
           NODE_VERSION: ${{ env.NODE_VERSION }}
-          NEXT_PUBLIC_AZURE_AD_CLIENT_ID=${{ secrets.NEXT_PUBLIC_AZURE_AD_CLIENT_ID }}
-          NEXT_PUBLIC_AZURE_AD_TENANT_ID=${{ secrets.NEXT_PUBLIC_AZURE_AD_TENANT_ID }}
-          NEXT_PUBLIC_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}
+          NEXT_PUBLIC_AZURE_AD_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_AZURE_AD_CLIENT_ID }}
+          NEXT_PUBLIC_AZURE_AD_TENANT_ID: ${{ secrets.NEXT_PUBLIC_AZURE_AD_TENANT_ID }}
+          NEXT_PUBLIC_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}
 
   deploy:
     runs-on: ubuntu-latest
