@@ -1,12 +1,12 @@
 FROM node:18-alpine as runner
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-COPY apps/msal-react-demo/next.config.js ./
+COPY ./package.json package-lock.json ./
+COPY ./apps/msal-react-demo/next.config.js ./
 
 # Copy the .next directory and the public directory
-COPY apps/msal-react-demo/.next ./.next
-COPY apps/msal-react-demo/public ./public
+COPY ./apps/msal-react-demo/.next ./.next
+COPY ./apps/msal-react-demo/public ./public
 
 EXPOSE 3000
 
