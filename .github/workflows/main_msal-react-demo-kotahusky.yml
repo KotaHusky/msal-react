@@ -12,7 +12,6 @@ env:
   NX_APP_NAME: 'msal-react-demo'
   AZURE_APP_NAME: 'msal-react-demo-kotahusky'
   AZURE_SLOT_NAME: 'production'
-  AZURE_PUBLISH_PROFILE: ${{ secrets.AZURE_APPSERVICE_PUBLISHPROFILE }}
 
 jobs:
   build:
@@ -65,5 +64,5 @@ jobs:
       with:
         app-name: ${{ env.AZURE_APP_NAME }}
         slot-name: ${{ env.AZURE_SLOT_NAME }}
-        publish-profile: ${{ env.AZURE_PUBLISH_PROFILE }}
+        publish-profile: ${{ secrets.AZURE_APPSERVICE_PUBLISHPROFILE }}
         images: 'index.docker.io/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}'
