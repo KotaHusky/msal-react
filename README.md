@@ -18,11 +18,31 @@ This is a demo project that shows how to use the Microsoft Authentication Librar
 
 ### Azure Web App
 
-Setup your Azure Web App and register your app with Azure Active Directory. You will need to create a new app registration in Azure Active Directory and configure/note the following:
+Setup your Azure Web App ...
+
+### Azure Entra ID: Tenant
+
+You will need a tenant in Microsoft Entra ID.
+
+[Quickstart: Create a new tenant in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
+
+### Azure Entra ID: App Registration
+
+You will need to create a new app registration in Microsoft Entra ID and configure/note the following:
 
 - Redirect URIs
 - Client ID
 - Tenant ID
+
+[Quickstart: Register an application with the Microsoft identity platform](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
+
+### Azure Entra ID: Identity Providers
+
+You will need to configure the identity providers in Microsoft Entra ID.
+
+[Identity Provider: Local](https://learn.microsoft.com/en-us/azure/active-directory-b2c/identity-provider-local)
+[Identity Provider: Apple](https://learn.microsoft.com/en-us/azure/active-directory-b2c/identity-provider-apple-id)
+[Identity Provider: Microsoft](https://learn.microsoft.com/en-us/azure/active-directory-b2c/identity-provider-microsoft-account)
 
 ### GitHub Actions
 
