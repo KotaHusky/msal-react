@@ -1,4 +1,4 @@
-ARG NODE_VERSION
+ARG NODE_VERSION=18-alpine
 FROM node:${NODE_VERSION} as runner
 WORKDIR /app
 
