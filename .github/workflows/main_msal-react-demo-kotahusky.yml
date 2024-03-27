@@ -13,30 +13,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup Node.js environment
-      uses: actions/setup-node@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: '20'
-
-    - uses: actions/cache@v3
-      id: npm-cache
-      with:
-        path: ${{ steps.npm-cache-dir.outputs.dir }}
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+        node-version: 20
+        cache: 'npm'
 
     - name: Install dependencies
       run: npm ci
-      if: steps.npm-cache.outputs.cache-hit != 'true'
 
     - name: Build Nx Next.js app
       run: npx nx build msal-react-demo
 
     - name: Show directory structure
-      run: |
-        tree -L 3 -d -I 'node_modules|dist|.git'
-        ls ./apps/msal-react-demo/.next
+      run: tree -a -L 3 -d ./apps ./libs
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
