@@ -13,3 +13,6 @@ dist/
 # Next.js
 .next
 out
+
+# .env files
+*.env.local
