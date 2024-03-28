@@ -1,19 +1,13 @@
-import { AuthenticatedTemplate, useMsal } from "@azure/msal-react";
-import { useEffect, useState } from "react";
+import { AuthenticatedTemplate } from "@azure/msal-react";
+import { useContext } from "react";
 import styles from './header.module.css';
+import { AccountContext } from '@my-workspace/lib-msal-react'
 
 /* eslint-disable-next-line */
 export interface HeaderProps {}
 
 export function Header(props: HeaderProps) {
-  const { accounts } = useMsal();
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    if (accounts.length > 0) {
-      setUsername(accounts[0].username);
-    }
-  }, [accounts]);
+  const { username } = useContext(AccountContext); // Use AccountContext
 
   return (
     <div className={styles['container']}>
