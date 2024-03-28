@@ -7,7 +7,7 @@ import { AccountContext } from '@my-workspace/lib-msal-react'
 export interface HeaderProps {}
 
 export function Header(props: HeaderProps) {
-  const { username } = useContext(AccountContext); // Use AccountContext
+  const { username, isLoading } = useContext(AccountContext);
 
   return (
     <div className={styles['container']}>

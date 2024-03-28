@@ -3,7 +3,7 @@ import { useMsal } from '@azure/msal-react';
 
 type AccountState = {
   username: string | null;
-  loading: boolean;
+  isLoading: boolean;
 };
 
 /**
@@ -12,18 +12,18 @@ type AccountState = {
  * It also handles authentication and token acquisition using MSAL.
  * @see https://react.dev/learn/passing-data-deeply-with-context
  */
-export const AccountContext = createContext<AccountState>({ username: null, loading: true });
+export const AccountContext = createContext<AccountState>({ username: null, isLoading: true });
 
 // Create a provider component
 export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { inProgress, accounts } = useMsal();
-  const [account, setAccount] = useState<AccountState>({ username: null, loading: true });
+  const [account, setAccount] = useState<AccountState>({ username: null, isLoading: true });
 
   useEffect(() => {
     if (inProgress === 'none' && accounts.length > 0) {
-      setAccount({ username: accounts[0].username, loading: false });
+      setAccount({ username: accounts[0].username, isLoading: false });
     }
   }, [inProgress, accounts]);
 
