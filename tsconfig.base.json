@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@my-workspace/lib-msal-react": ["libs/lib-msal-react/src/index.ts"]
+      "@my-workspace/lib-msal-react": ["libs/lib-msal-react/src/index.ts"],
+      "@my-workspace/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
