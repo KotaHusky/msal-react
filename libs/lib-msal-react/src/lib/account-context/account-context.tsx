@@ -22,8 +22,9 @@ export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   const [account, setAccount] = useState<AccountState>({ username: null, isLoading: true });
 
   useEffect(() => {
+    console.log(accounts);
     if (inProgress === 'none' && accounts.length > 0) {
-      setAccount({ username: accounts[0].username, isLoading: false });
+      setAccount({ username: accounts[0].name ?? null, isLoading: false });
     }
   }, [inProgress, accounts]);
 
