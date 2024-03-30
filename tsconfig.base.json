@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@my-workspace/lib-msal-react": ["libs/lib-msal-react/src/index.ts"],
-      "@my-workspace/ui": ["libs/ui/src/index.ts"]
+      "@my-workspace/ui": ["libs/ui/src/index.ts"],
+      "@my-workspace/util-verify-token": ["libs/util-verify-token/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
