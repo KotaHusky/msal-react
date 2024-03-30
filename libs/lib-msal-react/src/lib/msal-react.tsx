@@ -28,7 +28,11 @@ const b2cPolicies = {
   authorityDomain: `${b2cAuthority}.b2clogin.com`,
 };
 
-// MSAL Configuration
+export const loginRequest = {
+  scopes: [`https://${b2cAuthority}.onmicrosoft.com/${process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID}/ReadUser`]
+};
+
+// MSAL Configurationcc
 const msalConfig: Configuration = {
   auth: {
     clientId: process.env.NEXT_PUBLIC_AZURE_AD_CLIENT_ID || '',
@@ -53,10 +57,10 @@ const msalConfig: Configuration = {
             console.error(message);
             return;
           case LogLevel.Info:
-            console.info(message);
+            // console.info(message);
             return;
           case LogLevel.Verbose:
-            console.debug(message);
+            // console.debug(message);
             return;
           case LogLevel.Warning:
             console.warn(message);

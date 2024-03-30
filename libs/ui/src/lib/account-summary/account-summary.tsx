@@ -1,58 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { useAccount } from '@my-workspace/lib-msal-react';
-import styles from './account-summary.module.css';
+// Import necessary libraries
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import { useMsal } from "@azure/msal-react";
+import { AccountContext, getToken } from '@my-workspace/lib-msal-react';
+import { PublicClientApplication } from '@azure/msal-browser';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface AccountSummaryProps {}
+/**
+ * This component displays a summary of the user's account.
+ * It uses the AccountContext to access the user's username.
+ */
+export const AccountSummary: React.FC = () => {
+  // Use the useContext hook to access the AccountContext
+  const { username, isLoading } = useContext(AccountContext);
+  const { inProgress, instance, accounts } = useMsal();
 
-export function AccountSummary(props: AccountSummaryProps) {
-  const { accessToken } = useAccount();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  // State to hold the API response
+  const [apiResponse, setApiResponse] = useState(null);
 
+  // Use the useEffect hook to call the API when the component mounts
   useEffect(() => {
-    if (!accessToken) {
-      setError('You must be logged in to view this information.');
-      return;
+    if (inProgress === 'none' && accounts.length > 0) {
+      const fetchTokenAndData = async () => {
+        const token = await getToken(instance as PublicClientApplication, accounts[0]); // Replace scopes as needed
+        if (token) {
+          axios.get('/api/hello-msal', {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          .then(response => setApiResponse(response.data))
+          .catch(error => console.error(error));
+        }
+      };
+
+      fetchTokenAndData();
     }
+  }, [inProgress, instance, accounts]);
 
-    setLoading(true);
-    fetch('/api/hello-msal', { // Adjust the API endpoint as necessary
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json'
-      },
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to fetch protected data.');
-      }
-      return response.json();
-    })
-    .then(data => {
-      setData(data);
-      setError('');
-    })
-    .catch(error => {
-      console.error("Error fetching protected data:", error);
-      setError(error.message);
-    })
-    .finally(() => setLoading(false));
-  }, [accessToken]);
-
+  // Render the component
   return (
-    <div className={styles.container}>
-      <h1>Welcome to AccountSummary!</h1>
-      {error && <p className={styles.error}>{error}</p>}
-      {loading ? (
-        <p>Loading account information...</p>
+    <div className="text-white">
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : username ? (
+        <p>Welcome, {username}!</p>
       ) : (
-        data && <pre>{JSON.stringify(data, null, 2)}</pre>
+        <p>Please sign in.</p>
       )}
+      {apiResponse && <p>{apiResponse}</p>}
     </div>
   );
-}
-
-export default AccountSummary;
+};

@@ -1,9 +1,16 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { useMsal } from '@azure/msal-react';
+'use client'
+
+import { createContext, useEffect, useState } from 'react';
+import { useMsal, useIsAuthenticated } from '@azure/msal-react';
 
 type AccountState = {
   username: string | null;
   isLoading: boolean;
+};
+
+const AccountDefaultState: AccountState = {
+  username: null,
+  isLoading: true,
 };
 
 /**
@@ -12,32 +19,26 @@ type AccountState = {
  * It also handles authentication and token acquisition using MSAL.
  * @see https://react.dev/learn/passing-data-deeply-with-context
  */
-export const AccountContext = createContext<AccountState>({ username: null, isLoading: true });
+const AccountContext = createContext<AccountState>(AccountDefaultState);
 
-// Create a provider component
-export const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
+const AccountProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { inProgress, accounts } = useMsal();
-  const [account, setAccount] = useState<AccountState>({ username: null, isLoading: true });
+  const [account, setAccount] = useState<AccountState>(AccountDefaultState);
+  const isAuthenticated = useIsAuthenticated();
 
   useEffect(() => {
-    console.log(accounts);
     if (inProgress === 'none' && accounts.length > 0) {
       setAccount({ username: accounts[0].name ?? null, isLoading: false });
     }
-  }, [inProgress, accounts]);
+  }, [inProgress, accounts, isAuthenticated]);
 
   return (
-    <AccountContext.Provider
-      value={account}
-    >
+    <AccountContext.Provider value={account}>
       {children}
     </AccountContext.Provider>
   );
 };
 
-// Create a hook to use the context
-export const useAccount = () => {
-  return useContext(AccountContext);
-};
+export { AccountContext, AccountProvider };
