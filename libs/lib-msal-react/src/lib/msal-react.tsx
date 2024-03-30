@@ -6,7 +6,7 @@ import { AccountProvider } from './account-context/account-context';
 
 const b2cAuthority = 'msalreact';
 
-const policyNames = {
+export const policyNames = {
   signUpSignIn: 'B2C_1_signup_signin',
   forgotPassword: 'B2C_1_reset',
   editProfile: 'B2C_1_edit_profile',
