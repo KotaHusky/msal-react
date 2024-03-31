@@ -1,0 +1,9 @@
+{
+  "name": "data-access-account-context",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/data-access-account-context/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project data-access-account-context --web",
+  "targets": {}
+}

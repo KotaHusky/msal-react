@@ -8,8 +8,8 @@ import {
 } from '@azure/msal-react';
 import { AccountSummary } from '@my-workspace/ui';
 
-const ButtonLogin = dynamic(() => import('@my-workspace/lib-msal-react').then(mod => mod.ButtonLogin), { ssr: false });
-const ButtonLogout = dynamic(() => import('@my-workspace/lib-msal-react').then(mod => mod.ButtonLogout), { ssr: false });
+const ButtonLogin = dynamic(() => import('@my-workspace/feature-msal-react').then(mod => mod.ButtonLogin), { ssr: false });
+const ButtonLogout = dynamic(() => import('@my-workspace/feature-msal-react').then(mod => mod.ButtonLogout), { ssr: false });
 
 export default function Page() {
   return (

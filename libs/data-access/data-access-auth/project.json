@@ -1,0 +1,19 @@
+{
+  "name": "data-access-auth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/data-access-auth/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/data-access/data-access-auth",
+        "main": "libs/data-access/data-access-auth/src/index.ts",
+        "tsConfig": "libs/data-access/data-access-auth/tsconfig.lib.json",
+        "assets": ["libs/data-access/data-access-auth/*.md"]
+      }
+    }
+  },
+  "tags": []
+}

@@ -2,8 +2,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useMsal } from "@azure/msal-react";
-import { AccountContext, getToken } from '@my-workspace/lib-msal-react';
+import { AccountContext } from '@my-workspace/data-access-account-context';
 import { PublicClientApplication } from '@azure/msal-browser';
+import { getToken } from '@my-workspace/data-access-auth';
 
 /**
  * This component displays a summary of the user's account.

@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app';
-import { MsalProviderComponent } from '@my-workspace/lib-msal-react';
+import { MsalProviderComponent } from '@my-workspace/feature-msal-react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

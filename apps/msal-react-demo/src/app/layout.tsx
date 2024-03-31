@@ -1,7 +1,7 @@
 'use client';
 
 import 'tailwindcss/tailwind.css';
-import { MsalProviderComponent } from '@my-workspace/lib-msal-react';
+import { MsalProviderComponent } from '@my-workspace/feature-msal-react';
 import { Metadata } from 'next';
 import { Header } from '@my-workspace/ui';
 

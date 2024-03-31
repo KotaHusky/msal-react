@@ -1,7 +1,7 @@
 import { AuthenticatedTemplate } from "@azure/msal-react";
 import { useContext } from "react";
 import styles from './header.module.css';
-import { AccountContext } from '@my-workspace/lib-msal-react'
+import { AccountContext } from "@my-workspace/data-access-account-context";
 
 /* eslint-disable-next-line */
 export interface HeaderProps {}

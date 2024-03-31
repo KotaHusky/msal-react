@@ -4,7 +4,9 @@ export async function GET(request: Request) {
   try {
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return new Response('Unauthorized, missing or invalid token', { status: 401 });
+      return new Response('Unauthorized, missing or invalid token', {
+        status: 401,
+      });
     }
 
     const token = authHeader.split(' ')[1];
@@ -12,6 +14,9 @@ export async function GET(request: Request) {
 
     return new Response('Hello, from protected API!');
   } catch (error) {
-    return new Response((error as Error).message || 'Error during token verification', { status: 401 });
+    return new Response(
+      (error as Error).message || 'Error during token verification',
+      { status: 401 },
+    );
   }
 }
