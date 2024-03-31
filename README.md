@@ -1,5 +1,7 @@
 # MSAL-React Demo
 
+[![GitHub Actions Workflow](https://github.com/KotaHusky/msal-react/actions/workflows/deploy-container-to-azure-web-app.yml/badge.svg)](https://github.com/KotaHusky/msal-react/actions/workflows/deploy-container-to-azure-web-app.yml)
+
 ## Summary
 
 This is a demo project that shows how to use the Microsoft Authentication Library for React (MSAL-React).
