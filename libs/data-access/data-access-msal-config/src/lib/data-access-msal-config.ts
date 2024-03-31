@@ -28,6 +28,9 @@ export const loginRequest = {
   scopes: [`https://${b2cAuthority}.onmicrosoft.com/${process.env['NEXT_PUBLIC_AZURE_AD_CLIENT_ID']}/ReadUser`]
 };
 
+console.log("MSAL Authorities:", b2cPolicies.authorities);
+console.log("MSAL Scopes:", loginRequest.scopes);
+
 // MSAL Configurationcc
 const msalConfig: Configuration = {
   auth: {
@@ -53,10 +56,10 @@ const msalConfig: Configuration = {
             console.error(message);
             return;
           case LogLevel.Info:
-            // console.info(message);
+            console.info(message);
             return;
           case LogLevel.Verbose:
-            // console.debug(message);
+            console.debug(message);
             return;
           case LogLevel.Warning:
             console.warn(message);
