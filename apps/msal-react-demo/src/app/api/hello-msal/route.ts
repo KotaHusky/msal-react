@@ -2,7 +2,7 @@ import { verifyAzureB2CToken } from "@my-workspace/util-verify-token";
 
 export const GET = async function (request: Request) {
   try {
-    await verifyAzureB2CToken(request);
+    await verifyAzureB2CToken(request, 'ReadUser');
     return new Response('Hello, from protected API!');
   } catch (error) {
     return new Response(

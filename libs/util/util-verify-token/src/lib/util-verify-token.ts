@@ -17,7 +17,7 @@ const getSigningKey = (header: any, callback: any) => {
   });
 };
 
-export async function verifyAzureB2CToken(request: Request) {
+export async function verifyAzureB2CToken(request: Request, requiredScope: string) {
   return new Promise((resolve, reject) => {
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -35,10 +35,17 @@ export async function verifyAzureB2CToken(request: Request) {
         issuer: `https://${b2cAuthority}.b2clogin.com/${process.env['NEXT_PUBLIC_AZURE_AD_TENANT_ID']}/v2.0/`,
         algorithms: ['RS256'],
       },
-      (err, decoded) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (err, decoded:any) => {
         if (err) {
           reject(err);
         } else {
+          // Check if the token has the required scope
+          if (!decoded.scp || !decoded.scp.includes(requiredScope)) {
+            reject('Unauthorized, missing or invalid scope');
+            return;
+          }
+
           resolve(decoded);
         }
       },
