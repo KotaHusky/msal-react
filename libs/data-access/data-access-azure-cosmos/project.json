@@ -1,0 +1,19 @@
+{
+  "name": "data-access-azure-cosmos",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/data-access-azure-cosmos/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/data-access/data-access-azure-cosmos",
+        "main": "libs/data-access/data-access-azure-cosmos/src/index.ts",
+        "tsConfig": "libs/data-access/data-access-azure-cosmos/tsconfig.lib.json",
+        "assets": ["libs/data-access/data-access-azure-cosmos/*.md"]
+      }
+    }
+  },
+  "tags": []
+}

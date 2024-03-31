@@ -21,6 +21,9 @@
       "@my-workspace/data-access-auth": [
         "libs/data-access/data-access-auth/src/index.ts"
       ],
+      "@my-workspace/data-access-azure-cosmos": [
+        "libs/data-access/data-access-azure-cosmos/src/index.ts"
+      ],
       "@my-workspace/data-access-msal-config": [
         "libs/data-access/data-access-msal-config/src/index.ts"
       ],
