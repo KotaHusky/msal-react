@@ -17,8 +17,16 @@ const getSigningKey = (header: any, callback: any) => {
   });
 };
 
-export async function verifyB2CToken(token: string) {
+export async function verifyAzureB2CToken(request: Request) {
   return new Promise((resolve, reject) => {
+    const authHeader = request.headers.get('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      reject('Unauthorized, missing or invalid token');
+      return;
+    }
+
+    const token = authHeader.split(' ')[1];
+
     jwt.verify(
       token,
       getSigningKey,
