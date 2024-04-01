@@ -101,7 +101,7 @@ jobs:
     needs: build
     if: needs.check_commit.outputs.should_skip == 'false'
     environment:
-      name: ${{ env.AZURE_APPSERVICE_SLOT_NAME }}
+      name: production
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
