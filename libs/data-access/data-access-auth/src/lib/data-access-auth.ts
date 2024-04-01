@@ -1,4 +1,4 @@
-import { loginRequest } from "@my-workspace/data-access-msal-config";
+import { loginConfig } from "@my-workspace/data-access-msal-config";
 import { InteractionRequiredAuthError, PublicClientApplication, AccountInfo } from "@azure/msal-browser";
 
 export async function getToken(msalInstance: PublicClientApplication, account: AccountInfo): Promise<string | null> {
@@ -15,7 +15,7 @@ export async function getToken(msalInstance: PublicClientApplication, account: A
 
   try {
     const response = await msalInstance.acquireTokenSilent({
-      ...loginRequest,
+      ...loginConfig,
       account: account
     });
 
@@ -32,7 +32,7 @@ export async function getToken(msalInstance: PublicClientApplication, account: A
       // fallback to interaction when silent call fails
       try {
         const response = await msalInstance.acquireTokenPopup({
-          ...loginRequest,
+          ...loginConfig,
           account: account
         });
 

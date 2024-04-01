@@ -1,43 +1,39 @@
 import { Configuration, LogLevel, PublicClientApplication } from '@azure/msal-browser';
 
-export const b2cAuthority = 'msalreact';
-
-export const policyNames = {
-  signUpSignIn: 'B2C_1_signup_signin',
-  forgotPassword: 'B2C_1_reset',
-  editProfile: 'B2C_1_edit_profile',
+export const b2cAuthorityDomain = `${process.env['AZURE_B2C_AUTHORITY']}.b2clogin.com`
+const b2cAuthorityUrl = `${b2cAuthorityDomain}/${process.env['AZURE_B2C_AUTHORITY']}.onmicrosoft.com`;
+const policyNames = {
+  signUpSignIn: process.env['AZURE_B2C_FLOW_SIGN_UP_SIGN_IN'],
+  forgotPassword: process.env['AZURE_B2C_FLOW_FORGOT_PASSWORD'],
+  editProfile: process.env['AZURE_B2C_FLOW_EDIT_PROFILE'],
 };
 
 export const b2cPolicies = {
   names: policyNames,
   authorities: {
     signUpSignIn: {
-      authority: `https://${b2cAuthority}.b2clogin.com/${b2cAuthority}.onmicrosoft.com/${policyNames.signUpSignIn}`,
+      authority: `${b2cAuthorityUrl}/${policyNames.signUpSignIn}`,
     },
     forgotPassword: {
-      authority: `https://${b2cAuthority}.b2clogin.com/${b2cAuthority}.onmicrosoft.com/${policyNames.forgotPassword}`,
+      authority: `${b2cAuthorityUrl}/${policyNames.forgotPassword}`,
     },
     editProfile: {
-      authority: `https://${b2cAuthority}.b2clogin.com/${b2cAuthority}.onmicrosoft.com/${policyNames.editProfile}`,
+      authority: `${b2cAuthorityUrl}/${policyNames.editProfile}`,
     },
-  },
-  authorityDomain: `${b2cAuthority}.b2clogin.com`,
+  }
 };
 
-export const loginRequest = {
-  scopes: [`https://${b2cAuthority}.onmicrosoft.com/${process.env['NEXT_PUBLIC_AZURE_AD_CLIENT_ID']}/ReadUser`]
+export const loginConfig = {
+  scopes: [`https://${process.env['AZURE_B2C_AUTHORITY']}.onmicrosoft.com/${process.env['AZURE_B2C_CLIENT_ID']}/ReadUser`]
 };
-
-console.log("MSAL Authorities:", b2cPolicies.authorities);
-console.log("MSAL Scopes:", loginRequest.scopes);
 
 // MSAL Configurationcc
 const msalConfig: Configuration = {
   auth: {
-    clientId: process.env['NEXT_PUBLIC_AZURE_AD_CLIENT_ID'] || '',
+    clientId: process.env['AZURE_B2C_CLIENT_ID'] || '',
     authority: b2cPolicies.authorities.signUpSignIn.authority,
-    knownAuthorities: [b2cPolicies.authorityDomain],
-    redirectUri: process.env['NEXT_PUBLIC_REDIRECT_URI'],
+    knownAuthorities: [b2cAuthorityDomain],
+    redirectUri: process.env['AZURE_B2C_REDIRECT_URI'],
   },
   cache: {
     cacheLocation: 'sessionStorage',

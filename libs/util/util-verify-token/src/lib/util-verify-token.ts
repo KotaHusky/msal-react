@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import jwksRsa from 'jwks-rsa';
-import { b2cAuthority, policyNames } from '@my-workspace/data-access-msal-config';
+import { b2cAuthorityDomain, b2cPolicies } from '@my-workspace/data-access-msal-config';
 
 const jwksClient = jwksRsa({
-  jwksUri: `https://${b2cAuthority}.b2clogin.com/${b2cAuthority}.onmicrosoft.com/${policyNames.signUpSignIn}/discovery/v2.0/keys`,
+  jwksUri: `https://${b2cPolicies.authorities.signUpSignIn.authority}/discovery/v2.0/keys`,
 });
 
 const getSigningKey = (header: any, callback: any) => {
@@ -31,8 +31,8 @@ export async function verifyAzureB2CToken(request: Request, requiredScope: strin
       token,
       getSigningKey,
       {
-        audience: process.env['NEXT_PUBLIC_AZURE_AD_CLIENT_ID'],
-        issuer: `https://${b2cAuthority}.b2clogin.com/${process.env['NEXT_PUBLIC_AZURE_AD_TENANT_ID']}/v2.0/`,
+        audience: process.env['AZURE_B2C_CLIENT_ID'],
+        issuer: `${b2cAuthorityDomain}/${process.env['AZURE_B2C_TENANT_ID']}/v2.0/`,
         algorithms: ['RS256'],
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
