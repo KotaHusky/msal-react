@@ -97,12 +97,23 @@ Environment variables are set in the `env` section of the GitHub Actions workflo
 
 ## Project Structure
 
-This project is an integrated workspace powered by Nx. It contains the following:
+This project is an integrated workspace powered by Nx. It adheres to [Nx Library Types](https://nx.dev/concepts/more-concepts/library-types):
 
-- `apps/msal-react-demo` - The NextJS application that uses MSAL-React.
-- `libs/lib-msal-react` - A library that wraps MSAL-React and provides a hook to use in the NextJS app.
+`data-access` - Handles data access and state management.
+`feature` - Integrates data access and UI components to provide functionality.
+`util` - Provides utility functions.
+`ui` - Defines stylized ui components and layouts.
 
-Separating the MSAL-React logic into a library allows for easier reuse across multiple applications.
+This project contains the following:
+
+- `apps/msal-react-demo` - A NextJS web client and server application.
+- `libs/data-access/data-access-account-context` - Handles an account context "State"
+- `libs/data-access/data-access-auth` - Acquires authentication tokens to access protected API resources
+- `libs/data-access/data-access-msal-config` - Configures MSAL-React
+- `libs/feature/feature-msal-react` - Provides login and logout components
+- `libs/util/util-verify-token` - Verifies tokens to access protected API resources
+
+Separating logic into a libraries allows for easier reuse across multiple applications.
 
 ## Additional Resources
 
