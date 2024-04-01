@@ -11,15 +11,11 @@ export async function getToken(msalInstance: PublicClientApplication, account: A
   // Use the first account in the array as the active account
   account = accounts[0];
 
-  console.log('account:', account);
-
   try {
     const response = await msalInstance.acquireTokenSilent({
       ...loginConfig,
       account: account
     });
-
-    console.log('response:', response)
 
     if (!response || !response.accessToken) {
       console.error('Failed to acquire token. Silent request failed.');

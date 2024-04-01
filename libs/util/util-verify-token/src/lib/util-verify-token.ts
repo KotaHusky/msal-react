@@ -9,7 +9,7 @@ const jwksClient = jwksRsa({
 const getSigningKey = (header: any, callback: any) => {
   jwksClient.getSigningKey(header.kid, (err: any, key: any) => {
     if (err) {
-      console.log('Error in getSigningKey:', err);
+      console.error('Error in getSigningKey:', err);
       callback(err, null);
     } else {
       const signingKey = key.publicKey || key.rsaPublicKey;
@@ -40,7 +40,7 @@ export async function verifyAzureB2CToken(request: Request, requiredScope: strin
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (err, decoded:any) => {
         if (err) {
-          console.log('Error:', err); // Log any error
+          console.error('Error:', err);
           reject(err);
         } else {
           // Check if the token has the required scope
