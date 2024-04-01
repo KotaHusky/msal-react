@@ -6,8 +6,6 @@ const jwksClient = jwksRsa({
   jwksUri: `${b2cPolicies.authorities.signUpSignIn.authority}/discovery/v2.0/keys`,
 });
 
-console.log('jwksUri:', `${b2cPolicies.authorities.signUpSignIn.authority}/discovery/v2.0/keys`,);
-
 const getSigningKey = (header: any, callback: any) => {
   jwksClient.getSigningKey(header.kid, (err: any, key: any) => {
     if (err) {
