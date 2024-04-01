@@ -8,15 +8,53 @@ This is a demo project that shows how to use the Microsoft Authentication Librar
 
 ## Tech Stack
 
-- [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/)
-- [Docker Hub](https://hub.docker.com)
-- [GitHub Actions](https://github.com/features/actions)
-- [MSAL-React](https://www.npmjs.com/package/@azure/msal-react)
-- [NextJS](https://nextjs.org)
-- [Nx](https://nx.dev)
-- [TailwindCSS](https://tailwindcss.com)
+- [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) - Cloud webapp hosting 
+- [Azure B2C](https://learn.microsoft.com/en-us/azure/active-directory-b2c/overview) - Identity and access management with local and social identity providers.
+- [Docker Hub](https://hub.docker.com) - Docker container registry.
+- [GitHub Actions](https://github.com/features/actions) - CI/CD pipeline.
+- [GitHub CLI](https://cli.github.com) - Programmatic access to GitHub.
+- [MSAL-React](https://www.npmjs.com/package/@azure/msal-react) - Microsoft Authentication Library for React.
+- [NextJS](https://nextjs.org) - React framework for server-side rendering and static site generation.
+- [Nx](https://nx.dev) - Extensible dev tools for monorepos.
+- [TailwindCSS](https://tailwindcss.com) - Utility-first CSS framework for rapid UI development.
 
 ## Setup
+
+### GitHub
+
+Setup the GitHub CLI:
+
+```bash
+# Homebrew
+brew install gh
+```
+
+```bash
+# Windows
+choco install gh
+```
+
+Login to GitHub:
+
+```bash
+# GitHub CLI
+gh auth login
+```
+
+Create a new repository using the template:
+
+```bash
+# GitHub CLI
+gh repo create msal-react --template KotaHusky/msal-react --private
+```
+
+Setup the repository secrets and variables using the template files:
+
+```bash
+# GitHub CLI
+gh secret set --env-file .env.template-gha-secrets
+gh variable set --env-file .env.template-gha-variables
+```
 
 ### Azure Web App
 
