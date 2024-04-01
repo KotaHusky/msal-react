@@ -112,4 +112,4 @@ jobs:
         app-name: ${{ env.AZURE_APPSERVICE_APP_NAME }}
         slot-name: ${{ env.AZURE_APPSERVICE_SLOT_NAME }}
         publish-profile: ${{ env.AZURE_APPSERVICE_PUBLISHPROFILE }}
-        images: 'index.docker.io/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}'
+        images: index.docker.io/${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO}}:${{ github.sha }}
