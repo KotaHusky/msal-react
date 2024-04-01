@@ -7,6 +7,7 @@ import {
   UnauthenticatedTemplate,
 } from '@azure/msal-react';
 import { AccountSummary } from '@my-workspace/ui';
+import { ButtonUserDataGet, ButtonUserDataPost } from '@my-workspace/feature-azure-cosmosdb';
 
 const ButtonLogin = dynamic(() => import('@my-workspace/feature-msal-react').then(mod => mod.ButtonLogin), { ssr: false });
 const ButtonLogout = dynamic(() => import('@my-workspace/feature-msal-react').then(mod => mod.ButtonLogout), { ssr: false });
@@ -31,7 +32,11 @@ export default function Page() {
             </UnauthenticatedTemplate>
           </div>
         </div>
-        <AccountSummary />
+        <AuthenticatedTemplate>
+          <AccountSummary />
+          <ButtonUserDataGet />
+          <ButtonUserDataPost />
+        </AuthenticatedTemplate>
       </div>
     </div>
   );

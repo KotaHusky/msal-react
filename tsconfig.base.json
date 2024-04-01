@@ -27,6 +27,9 @@
       "@my-workspace/data-access-msal-config": [
         "libs/data-access/data-access-msal-config/src/index.ts"
       ],
+      "@my-workspace/feature-azure-cosmosdb": [
+        "libs/feature/feature-azure-cosmosdb/src/index.ts"
+      ],
       "@my-workspace/feature-msal-react": [
         "libs/feature/feature-msal-react/src/index.ts"
       ],

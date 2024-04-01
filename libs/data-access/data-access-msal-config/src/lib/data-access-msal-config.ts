@@ -28,7 +28,10 @@ export const b2cPolicies = {
 };
 
 export const loginConfig = {
-  scopes: [`https://${process.env['NEXT_PUBLIC_AZURE_B2C_AUTHORITY']}.onmicrosoft.com/${process.env['NEXT_PUBLIC_AZURE_B2C_CLIENT_ID']}/ReadUser`]
+  scopes: [
+    `https://${process.env['NEXT_PUBLIC_AZURE_B2C_AUTHORITY']}.onmicrosoft.com/${process.env['NEXT_PUBLIC_AZURE_B2C_CLIENT_ID']}/ReadUser`,
+    `https://${process.env['NEXT_PUBLIC_AZURE_B2C_AUTHORITY']}.onmicrosoft.com/${process.env['NEXT_PUBLIC_AZURE_B2C_CLIENT_ID']}/WriteUser`
+  ]
 };
 
 // MSAL Configurationcc
